@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "Subject_chooser",
-    "slug": "Subject_chooser",
+    "name": "app-ui",
+    "slug": "app-ui",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "packagerOpts": {
+      "sourceExts": [ "js", "json", "ts", "tsx", "jsx", "vue"]
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
