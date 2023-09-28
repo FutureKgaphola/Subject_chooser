@@ -16,7 +16,8 @@ const pill=StyleSheet.create({
         height:40,
         width:width/2,
         marginTop:10,
-        alignSelf:"flex-end"
+        alignSelf:"flex-end",
+        elevation:2
 
     }
 })
