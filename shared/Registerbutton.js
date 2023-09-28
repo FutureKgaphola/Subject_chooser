@@ -5,8 +5,8 @@ const Registerbutton = () => {
         <View style={styles.column}>
         <Image
         source={require("../assets/images/google.png")} 
-        style={{width: 40, height: 40, alignSelf:'flex-start'}}/>
-        <Text style={{marginTop:10}}>Register</Text>
+        style={{width: 30, height: 30, alignSelf:'flex-start',marginTop:10}}/>
+        <Text style={{marginTop:10,fontSize:20,fontFamily:'InclusiveSans_Regular'}}>Register</Text>
         </View>
      );
 }
@@ -17,5 +17,6 @@ const styles = StyleSheet.create({
     column:{
       display:'flex',
       flexDirection:'row',
+      alignItems:"center"
     },
 })

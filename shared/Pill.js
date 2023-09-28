@@ -14,7 +14,7 @@ const pill=StyleSheet.create({
         borderBottomLeftRadius:15,
         backgroundColor:'#5EB670',
         height:40,
-        width:width/2,
+        width:(width/2)-30,
         marginTop:10,
         alignSelf:"flex-end",
         elevation:2

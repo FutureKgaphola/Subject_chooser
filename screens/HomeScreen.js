@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native';
 import { removeItem } from '../utils/asyncStorage';
 import Pill from '../shared/Pill';
 import Imagepage from '../shared/Imagepage';
-import Registerbutton from '../shared/Registerbutton';
+import SharedForm from '../shared/SharedForm';
 
 const {width, height} = Dimensions.get('window');
 
@@ -18,13 +18,14 @@ export default function HomeScreen() {
   }
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       <View style={styles.childone}><Pill/>
       <Imagepage msg={"making the right choice"}/></View>
       <View style={styles.childtwo}>
-        <Registerbutton />
-
-        
+         <SharedForm/>
       </View>
+      </ScrollView>
+      
     </SafeAreaView>
   )
 }
@@ -44,7 +45,6 @@ const styles = StyleSheet.create({
   },
   childtwo:{
     flex:1,
-    backgroundColor:'green',
     alignItems:'stretch'
   },
   
