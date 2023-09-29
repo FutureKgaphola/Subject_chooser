@@ -1,53 +1,28 @@
 import React from "react";
-import { TouchableOpacity, Image } from "react-native";
-import { StyleSheet, Text, View } from "react-native";
-
-import googleIcon from "../assets/icons/google.png";
-import personImg from "../assets/images/classroom.png";
+import { StyleSheet, View,ScrollView } from "react-native";
+import Performance from "../shared/Performance";
+import { SafeAreaView } from 'react-native-safe-area-context'
+import Pill from '../shared/Pill';
+import Imagepage from '../shared/Imagepage';
 
 const PerformancePage = () => {
-  return (
-    <View>
-      <View style={styles.menubar}>
-        <Image source={googleIcon} style={{ height: 40 }} />
-        <TouchableOpacity style={[styles.navItems, styles.Pill1]}>
-          <Text style={styles.navText1}>My performance</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.navItems, styles.Pill2]}>
-          <Text style={styles.navText2}>About</Text>
-        </TouchableOpacity>
+  if(Platform.OS==='ios' || Platform.OS==='android' )
+  {
+    return (
+      <SafeAreaView style={styles.container}>
+      <ScrollView>
+      <View style={styles.childone}><Pill/>
+      <Imagepage msg={"Just to get a few things from you, so we assist in making the right career path."}/></View>
+      <View style={styles.childtwo}>
+         
+         <Performance/>
+         
       </View>
-      <View style={styles.container}>
-        {/* <Text>PerformancePage</Text> */}
-        <View style={styles.subcontainer}>
-          <View style={styles.card}>
-            <Image
-              source={personImg}
-              style={{ height: 150, width: 150, borderRadius: 30 }}
-            />
-            <Text style={styles.subHeader}>Take a test</Text>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.textBtn}>Go</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* card 2 */}
-        <View style={styles.subcontainer}>
-          <View style={styles.card}>
-            <Image
-              source={personImg}
-              style={{ height: 150, width: 150, borderRadius: 30 }}
-            />
-            <Text style={styles.subHeader}>Upload marks</Text>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.textBtn}>Go</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
+      </ScrollView>
+      
+    </SafeAreaView>
+    )
+  }
 };
 
 export default PerformancePage;
@@ -59,6 +34,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     margin: 10,
     justifyContent:"center"
+  },
+  childone:{
+    flex:1,
+  },
+  childtwo:{
+    flex:1,
+    alignItems:'stretch'
   },
   menubar: {
     flex: 1,

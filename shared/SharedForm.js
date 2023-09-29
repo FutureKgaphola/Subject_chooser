@@ -2,19 +2,31 @@ import {
   TextInput,
   View,
   StyleSheet,
-  Text,
+  Text,Platform,
   TouchableOpacity,
 } from "react-native";
 import * as Progress from "react-native-progress";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import Registerbutton from "./Registerbutton";
-import { Card } from 'react-native-elements';
+import { Card } from "react-native-elements";
+import { Link } from "@react-navigation/native";
 
-const SharedForm = () => {
+const SharedForm = (props) => {
+  const tryTonavigate=()=>{
+    try {
+      props.navigation.push('PerformancePage')
+    } catch (error) {
+      return (
+        <Link to={{ screen: 'Profile', params: { id: 'jane' } }}>
+          Go to Jane's profile
+        </Link>
+      );
+    }
+  }
   return (
-    <Card elevation={7}
-                                containerStyle={{ borderRadius: 9,margin:7 }}>
+    <Card elevation={7} containerStyle={{ borderRadius: 9, margin: 7 ,marginLeft:Platform.OS === 'web' ? 40 : 0,
+    marginRight:Platform.OS === 'web' ? 40 : 0}}>
       <Registerbutton />
       <View style={styles.box}>
         <View style={styles.inputscontainer}>
@@ -56,7 +68,7 @@ const SharedForm = () => {
       />
 
       <View>
-        <TouchableOpacity style={styles.loginBtn}>
+        <TouchableOpacity style={styles.loginBtn} onPress={()=>tryTonavigate()}>
           <FontAwesome5 name="check-circle" size={24} color="#fff" />
           <Text style={{ color: "#fff", alignSelf: "center", padding: 3 }}>
             Login
@@ -72,8 +84,7 @@ const styles = StyleSheet.create({
   input: {
     alignItems: "center",
     fontSize: 20,
-    borderRadius: 27,
-    width: "100%"
+    width: "100%",
   },
   inputscontainer: {
     flexDirection: "row",
@@ -84,9 +95,9 @@ const styles = StyleSheet.create({
   },
   forgotPass: {
     alignSelf: `flex-end`,
-    margin:5,
-    fontSize:20,
-    fontFamily:'InclusiveSans_Regular'
+    margin: 5,
+    fontSize: 20,
+    fontFamily: "InclusiveSans_Regular",
   },
   loginBtn: {
     padding: 12,
@@ -95,12 +106,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#5EB670",
     alignSelf: `flex-end`,
     elevation: 5,
-    shadowColor: "gray",
-    shadowRadius: 5,
+    boxshadowColor: "gray",
+    boxshadowRadius: 5,
   },
   box: {
     backgroundColor: "#5EB670",
     padding: 7,
     borderRadius: 17,
+    
   },
 });

@@ -1,8 +1,9 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import AppNavigation from './navigation/appNavigation';
 import { Platform,SafeAreaView } from 'react-native';
 import * as Font from "expo-font";
 import { useEffect, useState } from 'react';
+import HomeScreen from './screens/HomeScreen';
 
 
 export default function App() {
@@ -23,7 +24,9 @@ export default function App() {
     return null; //equivalent to returning the splashscreen
   }
   return (
-    <AppNavigation />
+    <>
+    {Platform.OS==='ios' || Platform.OS==='android' ? <AppNavigation />: <HomeScreen/>}
+    </>
   );
 }
 

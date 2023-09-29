@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen.js';
 import OnboardingScreen from '../screens/OnboardingScreen.js';
 import { getItem } from '../utils/asyncStorage.js';
+import PerformancePage from '../screens/PerformancePage.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ export default function AppNavigation() {
         <Stack.Navigator initialRouteName='Onboarding'>
           <Stack.Screen name="Onboarding" options={{headerShown: false}} component={OnboardingScreen} />
           <Stack.Screen name="Home" options={{headerShown: false}} component={HomeScreen} />
+          <Stack.Screen name="PerformancePage" options={{headerShown: false}} component={PerformancePage} />
         </Stack.Navigator>
       </NavigationContainer>
     )
@@ -45,6 +47,7 @@ export default function AppNavigation() {
         <Stack.Navigator initialRouteName='Home'>
           <Stack.Screen name="Onboarding" options={{headerShown: false}} component={OnboardingScreen} />
           <Stack.Screen name="Home" options={{headerShown: false}} component={HomeScreen} />
+          <Stack.Screen name="PerformancePage" options={{headerShown: false}} component={PerformancePage} />
         </Stack.Navigator>
       </NavigationContainer>
     )
