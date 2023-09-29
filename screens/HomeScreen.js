@@ -6,6 +6,8 @@ import { removeItem } from '../utils/asyncStorage';
 import Pill from '../shared/Pill';
 import Imagepage from '../shared/Imagepage';
 import SharedForm from '../shared/SharedForm';
+import PerformancePage from './PerformancePage';
+
 
 const {width, height} = Dimensions.get('window');
 
@@ -22,7 +24,9 @@ export default function HomeScreen() {
       <View style={styles.childone}><Pill/>
       <Imagepage msg={"making the right choice"}/></View>
       <View style={styles.childtwo}>
-         <SharedForm/>
+         {/* <SharedForm/> */}
+         <PerformancePage/>
+       
       </View>
       </ScrollView>
       
