@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#E8F2EA",
     borderRadius: 30,
     flexDirection: "row",
-    marginHorizontal: 10,
+    margin: 10,
+    justifyContent:"center"
   },
   menubar: {
     flex: 1,

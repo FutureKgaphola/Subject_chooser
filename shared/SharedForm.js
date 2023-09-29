@@ -24,6 +24,8 @@ const SharedForm = () => {
             placeholder="user's email"
             placeholderTextColor={"gray"}
             cursorColor={"gray"}
+            returnKeyType="next"
+            keyboardType="email-address"
           />
         </View>
 
@@ -39,6 +41,8 @@ const SharedForm = () => {
             placeholder="user's passsword"
             cursorColor={"gray"}
             placeholderTextColor={"gray"}
+            returnKeyType="next"
+            keyboardType="email-address"
           />
         </View>
       </View>
@@ -69,7 +73,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: 20,
     borderRadius: 27,
-    width: "100%",
+    width: "100%"
   },
   inputscontainer: {
     flexDirection: "row",
