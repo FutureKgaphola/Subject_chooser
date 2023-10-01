@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import AppNavigation from './navigation/appNavigation';
-import { Platform,SafeAreaView } from 'react-native';
+import { Platform } from 'react-native';
 import * as Font from "expo-font";
 import { useEffect, useState } from 'react';
 import HomeScreen from './screens/HomeScreen';

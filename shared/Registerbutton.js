@@ -1,12 +1,34 @@
-import { Image, Text, StyleSheet,View } from "react-native";
+import { Image, Text, StyleSheet,View,TouchableOpacity } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 
-const Registerbutton = () => {
+const Registerbutton = (props) => {
+  const {isregister,SetRegister,isForgotpassword,
+  SetForgotpassword,
+  isSubmition,SetSubmition}=props;
+
+  const UpdateUI=()=>{
+    if(isregister===true){
+    SetRegister(false);
+    SetForgotpassword(false);
+    SetSubmition("Login");
+    }else{
+    SetRegister(true);
+    SetForgotpassword(false);
+    SetSubmition("Register");
+    }
+  }
+  const backIcon=()=>{
+    SetRegister(false);
+    SetForgotpassword(false);
+    SetSubmition("Login");
+  }
     return ( 
         <View style={styles.column}>
-        <Image
-        source={require("../assets/images/google.png")} 
-        style={{width: 30, height: 30, alignSelf:'flex-start',marginTop:10}}/>
-        <Text style={{marginTop:10,fontSize:20,fontFamily:'InclusiveSans_Regular'}}>Register</Text>
+          {!isForgotpassword ? <TouchableOpacity onPress={()=>UpdateUI()}>
+          <Text style={{marginTop:10,fontSize:20,fontFamily:'InclusiveSans_Regular'}}>{isregister ? 'Back to login': 'Register'}</Text>
+        </TouchableOpacity> : <TouchableOpacity onPress={()=>backIcon()} style={{marginBottom:5}}>
+        <Ionicons name="arrow-back-circle-outline" size={26} color="black" /></TouchableOpacity>}
+       
         </View>
      );
 }

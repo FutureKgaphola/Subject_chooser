@@ -2,32 +2,60 @@ import {
   TextInput,
   View,
   StyleSheet,
-  Text,Platform,
+  Text, Platform,
   TouchableOpacity,
+  BackHandler,
+  Alert
 } from "react-native";
 import * as Progress from "react-native-progress";
 import { Feather } from "@expo/vector-icons";
-import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import Registerbutton from "./Registerbutton";
 import { Card } from "react-native-elements";
-import { Link } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 
 const SharedForm = (props) => {
-  const tryTonavigate=()=>{
-    try {
-      props.navigation.push('PerformancePage')
-    } catch (error) {
-      return (
-        <Link to={{ screen: 'Profile', params: { id: 'jane' } }}>
-          Go to Jane's profile
-        </Link>
-      );
+  const [isregister, SetRegister] = useState(false);
+  const [isForgotpassword, SetForgotpassword] = useState(false);
+  const [isSubmition, SetSubmition] = useState("Login");
+  const tryTonavigate = () => {
+    if(isSubmition === "Login"){
+      try {
+        (Platform.OS=='android' || Platform.OS=='ios') ? props.navigation.push('PerformancePage'):null
+      } catch (error) {
+        console.log(error);
+      }
+    }else{
+      Alert.alert('Succesful','Account created succesfull',[
+        {
+          text: 'login',
+          onPress: () =>(Platform.OS=='android' || Platform.OS=='ios') ? props.navigation.push('PerformancePage'):null,
+          style: 'default',
+        },
+      ])
     }
   }
+  useEffect(() => {
+    //const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+    //return () => backHandler.remove()
+  }, []);
+  const UpdateUI = () => {
+    SetRegister(false);
+    SetForgotpassword(isForgotpassword ? false : true);
+    SetSubmition(!isForgotpassword ? "no button" : "Login");
+
+  }
   return (
-    <Card elevation={7} containerStyle={{ borderRadius: 9, margin: 7 ,marginLeft:Platform.OS === 'web' ? 40 : 0,
-    marginRight:Platform.OS === 'web' ? 40 : 0}}>
-      <Registerbutton />
+    <Card elevation={7} containerStyle={{
+      borderRadius: 9, margin: 7, marginLeft: Platform.OS === 'web' ? 40 : 0,
+      marginRight: Platform.OS === 'web' ? 40 : 0
+    }}>
+      <Registerbutton
+        isregister={isregister}
+        SetRegister={SetRegister}
+        isForgotpassword={isForgotpassword}
+        SetForgotpassword={SetForgotpassword}
+        isSubmition={isSubmition} SetSubmition={SetSubmition} />
       <View style={styles.box}>
         <View style={styles.inputscontainer}>
           <Feather style={{ margin: 10 }} name="mail" size={25} color="black" />
@@ -36,12 +64,12 @@ const SharedForm = (props) => {
             placeholder="user's email"
             placeholderTextColor={"gray"}
             cursorColor={"gray"}
-            returnKeyType="next"
-            keyboardType="email-address"
+            enterKeyHint="next"
+            inputMode="email"
           />
         </View>
 
-        <View style={styles.inputscontainer}>
+        {!isForgotpassword && <View style={styles.inputscontainer}>
           <FontAwesome
             style={{ margin: 10 }}
             name="lock"
@@ -53,12 +81,34 @@ const SharedForm = (props) => {
             placeholder="user's passsword"
             cursorColor={"gray"}
             placeholderTextColor={"gray"}
-            returnKeyType="next"
-            keyboardType="email-address"
+            enterKeyHint="next"
+            inputMode="text"
+            secureTextEntry={true}
           />
-        </View>
+        </View>}
+
+
+        {isregister && <View style={styles.inputscontainer}>
+          <Ionicons style={{ margin: 10 }} name="person-circle-outline" size={24} color="black" />
+          <TextInput
+            style={styles.input}
+            placeholder="user's name"
+            cursorColor={"gray"}
+            placeholderTextColor={"gray"}
+            inputMode="text"
+          />
+        </View>}
+
       </View>
-      <Text style={styles.forgotPass}>forgot password</Text>
+      {isSubmition === 'Login' ? <TouchableOpacity onPress={() => UpdateUI()}>
+        <Text style={styles.forgotPass}>{isForgotpassword ? 'Back to login' : 'forgot password'}</Text>
+      </TouchableOpacity> : null}
+
+      {isForgotpassword && <TouchableOpacity onPress={() => Alert.alert('succesful', "Reset link has been sent to the email provided.")} style={{ backgroundColor: '#5EB670', borderRadius: 15, marginTop: 10 }}>
+        <Text style={{ fontSize: 20, alignSelf: 'center', color: 'white', padding: 5 }}>Reset</Text>
+      </TouchableOpacity>}
+
+
       <Progress.Bar
         progress={0.1}
         color="#5EB670"
@@ -67,14 +117,14 @@ const SharedForm = (props) => {
         style={{ margin: 5, width: "100%" }}
       />
 
-      <View>
-        <TouchableOpacity style={styles.loginBtn} onPress={()=>tryTonavigate()}>
+      {isSubmition === "Login" || isSubmition === "Register" ? <View>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => tryTonavigate()}>
           <FontAwesome5 name="check-circle" size={24} color="#fff" />
           <Text style={{ color: "#fff", alignSelf: "center", padding: 3 }}>
-            Login
+            {isSubmition}
           </Text>
         </TouchableOpacity>
-      </View>
+      </View> : null}
     </Card>
   );
 };
@@ -84,7 +134,7 @@ const styles = StyleSheet.create({
   input: {
     alignItems: "center",
     fontSize: 20,
-    width: "100%",
+    width: "100%"
   },
   inputscontainer: {
     flexDirection: "row",
@@ -113,6 +163,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#5EB670",
     padding: 7,
     borderRadius: 17,
-    
+
   },
 });
